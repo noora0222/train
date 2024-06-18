@@ -21,6 +21,6 @@ public class MemberServiceImpl implements MemberService {
     private MemberMapper memberMapper;
     @Override
     public int count() {
-        return memberMapper.count();
+        return (int) memberMapper.countByExample(null);
     }
 }

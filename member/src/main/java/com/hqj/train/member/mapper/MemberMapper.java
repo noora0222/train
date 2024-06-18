@@ -1,15 +1,32 @@
 package com.hqj.train.member.mapper;
 
-/**
- * ClassName: MemberMapper
- * Package: com.hqj.train.member.mapper
- * Description:
- *
- * @Author:HQJ
- * @Create:2024/6/18 - 16:15
- * @Version v1.0
- */
-public interface MemberMapper {
 
-    int count();
+import com.hqj.train.member.domain.Member;
+import com.hqj.train.member.domain.MemberExample;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface MemberMapper {
+    long countByExample(MemberExample example);
+
+    int deleteByExample(MemberExample example);
+
+    int deleteByPrimaryKey(Long id);
+
+    int insert(Member record);
+
+    int insertSelective(Member record);
+
+    List<Member> selectByExample(MemberExample example);
+
+    Member selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") Member record, @Param("example") MemberExample example);
+
+    int updateByExample(@Param("record") Member record, @Param("example") MemberExample example);
+
+    int updateByPrimaryKeySelective(Member record);
+
+    int updateByPrimaryKey(Member record);
 }
