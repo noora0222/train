@@ -15,4 +15,6 @@ import org.springframework.stereotype.Service;
 public interface MemberService {
 
     int count();
+
+    long register(String mobile);
 }
