@@ -1,6 +1,8 @@
 package com.hqj.train.member.service.Impl;
 
 import cn.hutool.core.collection.CollUtil;
+import com.hqj.train.common.exception.BusinessException;
+import com.hqj.train.common.exception.BusinessExceptionEnum;
 import com.hqj.train.member.domain.Member;
 import com.hqj.train.member.domain.MemberExample;
 import com.hqj.train.member.mapper.MemberMapper;
@@ -40,7 +42,7 @@ public class MemberServiceImpl implements MemberService {
 
         if (CollUtil.isNotEmpty(members)) {
             //return members.get(0).getId();
-            throw new RuntimeException("该moblie已注册");
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_EXIST);
         }
 
         Member member = new Member();
