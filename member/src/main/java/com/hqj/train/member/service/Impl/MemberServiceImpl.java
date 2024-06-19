@@ -1,6 +1,7 @@
 package com.hqj.train.member.service.Impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.IdUtil;
 import com.hqj.train.common.exception.BusinessException;
 import com.hqj.train.common.exception.BusinessExceptionEnum;
 import com.hqj.train.member.domain.Member;
@@ -46,7 +47,8 @@ public class MemberServiceImpl implements MemberService {
         }
 
         Member member = new Member();
-        member.setId(System.currentTimeMillis());
+        //这里使用了雪花算法
+        member.setId(IdUtil.getSnowflake(1,1).nextId());
         member.setMobile(mobile);
         memberMapper.insert(member);
         return member.getId();
