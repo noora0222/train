@@ -1,5 +1,6 @@
 package com.hqj.train.member.service;
 
+import com.hqj.train.member.req.MemberRegisterReq;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,5 @@ public interface MemberService {
 
     int count();
 
-    long register(String mobile);
+    long register(MemberRegisterReq req);
 }
