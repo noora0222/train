@@ -1,4 +1,4 @@
-package com.hqj.train.common.resp;
+package com.hqj.train.member.resp;
 
 public class MemberLoginResp {
     private Long id;

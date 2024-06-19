@@ -1,8 +1,9 @@
 package com.hqj.train.member.service;
 
-import com.hqj.train.member.domain.Member;
+import com.hqj.train.member.req.MemberLoginReq;
 import com.hqj.train.member.req.MemberRegisterReq;
 import com.hqj.train.member.req.MemberSendCodeReq;
+import com.hqj.train.member.resp.MemberLoginResp;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,4 +24,5 @@ public interface MemberService {
 
     void sendCode(MemberSendCodeReq req);
 
+    MemberLoginResp login(MemberLoginReq req);
 }

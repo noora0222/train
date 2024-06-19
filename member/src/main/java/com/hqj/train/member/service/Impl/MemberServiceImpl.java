@@ -1,23 +1,25 @@
 package com.hqj.train.member.service.Impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.hqj.train.common.exception.BusinessException;
 import com.hqj.train.common.exception.BusinessExceptionEnum;
+import com.hqj.train.common.util.JwtUtil;
 import com.hqj.train.common.util.SnowUtil;
 import com.hqj.train.member.domain.Member;
 import com.hqj.train.member.domain.MemberExample;
 import com.hqj.train.member.mapper.MemberMapper;
+import com.hqj.train.member.req.MemberLoginReq;
 import com.hqj.train.member.req.MemberRegisterReq;
 import com.hqj.train.member.req.MemberSendCodeReq;
+import com.hqj.train.member.resp.MemberLoginResp;
 import com.hqj.train.member.service.MemberService;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -85,6 +87,26 @@ public class MemberServiceImpl implements MemberService {
         LOG.info("对接短信通道");
     }
 
+    public MemberLoginResp login(MemberLoginReq req) {
+        String mobile = req.getMobile();
+        String code = req.getCode();
+        Member memberDB = selectByMobile(mobile);
+
+        // 如果手机号不存在，则插入一条记录
+        if (ObjectUtil.isNull(memberDB)) {
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_NOT_EXIST);
+        }
+
+        // 校验短信验证码
+        if (!"8888".equals(code)) {
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_CODE_ERROR);
+        }
+
+        MemberLoginResp memberLoginResp = BeanUtil.copyProperties(memberDB, MemberLoginResp.class);
+        String token = JwtUtil.createToken(memberLoginResp.getId(), memberLoginResp.getMobile());
+        memberLoginResp.setToken(token);
+        return memberLoginResp;
+    }
     private Member selectByMobile(String mobile) {
         MemberExample memberExample = new MemberExample();
         memberExample.createCriteria().andMobileEqualTo(mobile);

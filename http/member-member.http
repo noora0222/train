@@ -9,9 +9,16 @@ mobile=1400002
 
 ###
 
-POST http://localhost:8000/member/member/sendcode
+POST http://localhost:8000/member/member/send-code
 Content-Type: application/x-www-form-urlencoded
 
 mobile=18352966544
+
+###
+
+POST http://localhost:8000/member/member/login
+Content-Type: application/x-www-form-urlencoded
+
+mobile=18352966544&code=8888
 
 ###
