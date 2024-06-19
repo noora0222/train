@@ -1,6 +1,8 @@
 package com.hqj.train.member.service;
 
+import com.hqj.train.member.domain.Member;
 import com.hqj.train.member.req.MemberRegisterReq;
+import com.hqj.train.member.req.MemberSendCodeReq;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,4 +20,7 @@ public interface MemberService {
     int count();
 
     long register(MemberRegisterReq req);
+
+    void sendCode(MemberSendCodeReq req);
+
 }

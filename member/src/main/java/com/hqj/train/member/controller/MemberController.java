@@ -3,6 +3,7 @@ package com.hqj.train.member.controller;
 
 import com.hqj.train.common.resp.CommonResp;
 import com.hqj.train.member.req.MemberRegisterReq;
+import com.hqj.train.member.req.MemberSendCodeReq;
 import com.hqj.train.member.service.MemberService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
@@ -22,10 +23,14 @@ public class MemberController {
         int count = memberService.count();
         return new CommonResp<>(count);
     }
-
     @PostMapping("/register")
     public CommonResp<Long> register(@Valid MemberRegisterReq req) {
         long register = memberService.register(req);
         return new CommonResp<>(register);
+    }
+    @PostMapping("/sendcode")
+    public CommonResp<Long> sendcode(@Valid MemberSendCodeReq req) {
+        memberService.sendCode(req);
+        return new CommonResp<>();
     }
 }
