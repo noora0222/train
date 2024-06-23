@@ -17,8 +17,21 @@ mobile=18352966544
 ###
 
 POST http://localhost:8000/member/member/login
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
-mobile=18352966544&code=8888
+{
+"mobile": "18352966544",
+"code": "8888"
+}
+
+
+###
+
+GET http://localhost:8000/member/member/count
+Accept: application/json
+token: 123
+
+
+
 
 ###

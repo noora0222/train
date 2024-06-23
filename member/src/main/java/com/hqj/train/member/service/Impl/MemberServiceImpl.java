@@ -103,6 +103,7 @@ public class MemberServiceImpl implements MemberService {
         }
 
         MemberLoginResp memberLoginResp = BeanUtil.copyProperties(memberDB, MemberLoginResp.class);
+        //生产JWT token
         String token = JwtUtil.createToken(memberLoginResp.getId(), memberLoginResp.getMobile());
         memberLoginResp.setToken(token);
         return memberLoginResp;
